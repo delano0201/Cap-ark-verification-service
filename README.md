@@ -18,7 +18,6 @@ Cap-Ark is a lightweight, mobile-first path-tracing CAPTCHA designed to be easy 
   - [/validate-token](#validate-token)
 - [Verification Logic](#verification-logic)
 - [Token Lifecycle](#token-lifecycle)
-- [Customization](#customization)
 - [Contributing & License](#contributing--license)
 
 ---
@@ -151,28 +150,6 @@ Response:
 > - Valid for a limited time window (configurable)
 > - Validated once; on successful validation the token is invalidated/deleted
 > - Tokens are signed to prevent tampering
-
----
-
-> ## Customization
-> When self-hosting, tune these parameters to match your user base and threat model:
->
-> - minimum_points: required recorded points
-> - allowed_duration: acceptable trace time window (min/max)
-> - tolerance_radius: how close trace must be to the path
-> - coverage_threshold: percent of path that must be traced
-> - scoring_strictness: affects sensitivity to deviations
->
-> Example configuration (pseudocode):
-> ```json
-> {
->   "minimum_points": 12,
->   "allowed_duration": { "min_ms": 400, "max_ms": 7000 },
->   "tolerance_radius": 14,
->   "coverage_threshold": 0.7,
->   "scoring_strictness": "medium"
-> }
-> ```
 
 ---
 
