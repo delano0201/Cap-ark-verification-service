@@ -9,10 +9,8 @@
 
 ## 🚀 Quick Start (Embed)
 
-To add Cap-Ark to your website, copy and paste the following implementation.
-
 ### 1. The HTML
-Place the iframe where you want the CAPTCHA to appear.
+Place the following `iframe` where you want the CAPTCHA to appear on your page.
 
 ```html
 <iframe 
@@ -24,16 +22,19 @@ Place the iframe where you want the CAPTCHA to appear.
 
 2. The JavaScript
 
-The Cap-Ark iframe communicates with your parent page using postMessage. You must listen for the token and then validate it with the Cap-Ark server.
+Add this script to your parent page. It performs two specific actions:
+
+    Listens for the verification token sent from the iframe via postMessage.
+
+    Validates that token with the Cap-Ark server to ensure it is legitimate.
+
 JavaScript
 
 window.addEventListener("message", async (e) => {
-  // 1. Check if the message contains a Cap-Ark token
   if (!e.data || !e.data.capark_token) return;
   
   const token = e.data.capark_token;
 
-  // 2. Send the token to the Cap-Ark API for final validation
   const response = await fetch("[https://cap-ark.duckdns.org/validate-token](https://cap-ark.duckdns.org/validate-token)", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -44,7 +45,6 @@ window.addEventListener("message", async (e) => {
 
   if (result.valid) {
     console.log("✅ Human verified!");
-    // Logic to unlock your content here
   } else {
     console.error("❌ Token invalid or expired.");
   }
@@ -52,31 +52,31 @@ window.addEventListener("message", async (e) => {
 
 🛠️ API Reference
 Endpoint	Method	Description
-/challenge	GET	Generates a new unique challenge and a randomized path for the user to follow.
-/verify	POST	Internal: Used by the iframe to submit user coordinates. If the score meets requirements, it issues a one-time Verification Token.
-/validate-token	POST	Public: Used by the developer's server/frontend to confirm the token is legitimate.
-Token Validation Details
+/challenge	GET	Generates a new unique challenge and path.
+/verify	POST	Internal: Used by iframe to submit coordinates.
+/validate-token	POST	Public: Confirms if a token is legitimate.
+Validation Request Format
 
-POST https://cap-ark.duckdns.org/validate-token
-
-Request Body:
+Send a POST request to the validation endpoint with the following JSON body:
 JSON
 
 { 
   "token": "string" 
 }
 
-Response:
+Validation Response Format
+
+The server will return a boolean indicating if the verification was successful:
 JSON
 
 { 
   "valid": true 
 }
 
-    [!NOTE] Security: Once a token is validated, it is destroyed immediately (one-time use only).
+    [!IMPORTANT] One-Time Use: Once a token is validated, it is destroyed immediately to prevent replay attacks.
 
 📜 License
 
 This project is licensed under the MIT License. You are free to use, modify, and host this yourself.
 
-If you use our hosted instance at cap-ark.duckdns.org, please follow fair-use principles (no spamming).
+    [!TIP] If you use our hosted instance at cap-ark.duckdns.org, please follow fair-use principles.
