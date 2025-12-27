@@ -67,6 +67,8 @@ Cap-Ark is a lightweight, mobile-first path-tracing CAPTCHA designed to be easy 
 
 > ## API Reference
 
+> Use https://cap-ark.duckdns.org to use the api. 
+
 ### GET /challenge
 Generates a new tracing challenge.
 
