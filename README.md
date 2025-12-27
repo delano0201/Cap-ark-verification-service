@@ -11,7 +11,7 @@ Cap-Ark is a lightweight, mobile-first path-tracing CAPTCHA designed to be easy 
 ## Table of Contents
 
 - [About](#about)
-- [Live API / Embed (Quick Start)](# Live API Quick Start)
+- [Live API / Embed (Quick Start)](#Live-API-Quick-Start)
 - [API Reference](#api-reference)
   - [/challenge](#challenge)
   - [/verify](#verify)
