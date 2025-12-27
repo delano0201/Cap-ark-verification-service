@@ -18,7 +18,7 @@ Cap-Ark is a lightweight, mobile-first path-tracing CAPTCHA designed to be easy 
   - [/validate-token](#validate-token)
 - [Verification Logic](#verification-logic)
 - [Token Lifecycle](#token-lifecycle)
-- [Contributing & License](#contributing--license)
+- [License](#license)
 
 ---
 
@@ -153,7 +153,5 @@ Response:
 
 ---
 
-> ## Contributing & License
-> Contributions are welcome — open an issue or PR. Keep changes focused and include tests for scoring logic where possible.
->
+> ## License
 > MIT License — see LICENSE file.
