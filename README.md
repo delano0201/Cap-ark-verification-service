@@ -1,18 +1,29 @@
- Cap-Ark Documentation
+To make your GitHub documentation look professional and user-friendly, you should utilize Markdown features like syntax highlighting, badges, and clear visual hierarchies.
 
-Cap-Ark is a lightweight, mobile-friendly "path-tracing" CAPTCHA. Instead of clicking fire hydrants, users trace a generated path. It uses motion analysis and speed variance to distinguish between humans and bots.
- Quick Start (Embed)
+Here is a revamped version of your documentation that you can copy and paste directly into your README.md.
+🛡️ Cap-Ark Documentation
 
-To add Cap-Ark to your website, copy and paste the following implementation.
+Cap-Ark is a lightweight, mobile-friendly "path-tracing" CAPTCHA. Instead of identifying fire hydrants or crosswalks, users simply trace a generated path.
+Why Cap-Ark?
+
+    Mobile First: Designed for touchscreens and fluid mouse movements.
+
+    Motion Analysis: Uses speed variance and path deviation to distinguish humans from bots.
+
+    Privacy Focused: Lightweight implementation without heavy tracking scripts.
+
+🚀 Quick Start (Embed)
+
+Follow these two steps to integrate Cap-Ark into your web application.
 1. The HTML
 
-Place the iframe where you want the CAPTCHA to appear.
+Place the iframe where you want the CAPTCHA challenge to appear.
 HTML
 
 <iframe 
   id="capark-captcha" 
   src="https://cap-ark.duckdns.org/gen" 
-  style="width: 100%; height: 300px; border: none;">
+  style="width: 100%; height: 300px; border: none; border-radius: 8px;">
 </iframe>
 
 2. The JavaScript
@@ -23,7 +34,7 @@ JavaScript
 window.addEventListener("message", async (e) => {
   // 1. Check if the message contains a Cap-Ark token
   if (!e.data || !e.data.capark_token) return;
-
+  
   const token = e.data.capark_token;
 
   // 2. Send the token to the Cap-Ark API for final validation
@@ -36,30 +47,41 @@ window.addEventListener("message", async (e) => {
   const result = await response.json();
 
   if (result.valid) {
-    console.log("Human verified!");
-    // Logic to unlock your content here
+    console.log("✅ Human verified!");
+    // Proceed with form submission or content unlocking
   } else {
-    console.error("Token invalid or expired.");
+    console.error("❌ Token invalid or expired.");
   }
 });
 
-   API Reference
-GET /challenge
+🛠️ API Reference
+Endpoint	Method	Description
+/challenge	GET	Generates a new unique challenge and a randomized path.
+/verify	POST	Internal. Submits coordinates. If successful, issues a one-time token.
+/validate-token	POST	Public. Confirms if a token is legitimate and unused.
+Validate Token Request
 
-Generates a new unique challenge and a randomized path for the user to follow.
-POST /verify
+POST https://cap-ark.duckdns.org/validate-token
 
-Internal endpoint used by the iframe to submit user coordinates. If the score meets the requirements, it issues a one-time-use Verification Token.
-POST /validate-token
+Request Body:
+JSON
 
-Used by the developer's server/frontend to confirm the token is legitimate.
+{
+  "token": "string"
+}
 
-    Body: { "token": "string" }
+Response:
+JSON
 
-    Response: { "valid": true } or { "valid": false }
+{
+  "valid": true
+}
 
-    Note: Once a token is validated, it is destroyed (one-time use only).
+    [!IMPORTANT] One-Time Use: Once a token is validated, it is immediately destroyed to prevent replay attacks.
 
 📜 License
 
-This project is licensed under the MIT License. You are free to use, modify, and host this yourself. If you use our hosted instance at cap-ark.duckdns.org, please follow fair-use principles (no spamming).
+This project is licensed under the MIT License. You are free to use, modify, and host this yourself.
+
+If you use our hosted instance at cap-ark.duckdns.org, please follow fair-use principles (no spamming).
+
