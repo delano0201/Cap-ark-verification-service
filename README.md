@@ -11,7 +11,7 @@ Cap-Ark is a lightweight, mobile-first path-tracing CAPTCHA designed to be easy 
 ## Table of Contents
 
 - [About](#about)
-- [Live Demo / Embed (Quick Start)](#live-demo--embed-quick-start)
+- [Live API / Embed (Quick Start)](# Live API Quick Start)
 - [API Reference](#api-reference)
   - [/challenge](#challenge)
   - [/verify](#verify)
@@ -27,7 +27,7 @@ Cap-Ark is a lightweight, mobile-first path-tracing CAPTCHA designed to be easy 
 
 ---
 
-> ## Live Demo / Embed (Quick Start)
+> ## Live API Quick Start
 > Embed Cap-Ark with a single iframe and listen for a token via postMessage.
 >
 > Example iframe (responsive container recommended):
