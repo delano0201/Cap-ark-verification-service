@@ -66,7 +66,6 @@ Cap-Ark is a lightweight, mobile-first path-tracing CAPTCHA designed to be easy 
 ---
 
 > ## API Reference
-> All responses use JSON. Use HTTPS in production.
 
 ### GET /challenge
 Generates a new tracing challenge.
@@ -78,9 +77,9 @@ Response (200):
   "path": [
     { "x": 40, "y": 100 },
     { "x": 90, "y": 120 }
-  ],
-  "expires_at": "2025-12-27T12:00:00Z"
+  ]
 }
+
 ```
 
 ### POST /verify
@@ -110,8 +109,7 @@ Failure Response:
 ```json
 {
   "success": false,
-  "score": 0.31,
-  "reason": "low_coverage"
+  "score": 0.31
 }
 ```
 
