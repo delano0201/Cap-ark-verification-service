@@ -1,29 +1,25 @@
-To make your GitHub documentation look professional and user-friendly, you should utilize Markdown features like syntax highlighting, badges, and clear visual hierarchies.
+# 🛡️ Cap-Ark
 
-Here is a revamped version of your documentation that you can copy and paste directly into your README.md.
-🛡️ Cap-Ark Documentation
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![Mobile Friendly](https://img.shields.io/badge/Mobile-Friendly-brightgreen)
 
-Cap-Ark is a lightweight, mobile-friendly "path-tracing" CAPTCHA. Instead of identifying fire hydrants or crosswalks, users simply trace a generated path.
-Why Cap-Ark?
+**Cap-Ark** is a lightweight, mobile-friendly "path-tracing" CAPTCHA. Instead of clicking fire hydrants, users trace a generated path. It uses motion analysis and speed variance to distinguish between humans and bots.
 
-    Mobile First: Designed for touchscreens and fluid mouse movements.
+---
 
-    Motion Analysis: Uses speed variance and path deviation to distinguish humans from bots.
+## 🚀 Quick Start (Embed)
 
-    Privacy Focused: Lightweight implementation without heavy tracking scripts.
+To add Cap-Ark to your website, copy and paste the following implementation.
 
-🚀 Quick Start (Embed)
+### 1. The HTML
+Place the iframe where you want the CAPTCHA to appear.
 
-Follow these two steps to integrate Cap-Ark into your web application.
-1. The HTML
-
-Place the iframe where you want the CAPTCHA challenge to appear.
-HTML
-
+```html
 <iframe 
   id="capark-captcha" 
-  src="https://cap-ark.duckdns.org/gen" 
-  style="width: 100%; height: 300px; border: none; border-radius: 8px;">
+  src="[https://cap-ark.duckdns.org/gen](https://cap-ark.duckdns.org/gen)" 
+  style="width: 100%; height: 300px; border: 2px solid #eaecef; border-radius: 12px;"
+  frameborder="0">
 </iframe>
 
 2. The JavaScript
@@ -38,7 +34,7 @@ window.addEventListener("message", async (e) => {
   const token = e.data.capark_token;
 
   // 2. Send the token to the Cap-Ark API for final validation
-  const response = await fetch("https://cap-ark.duckdns.org/validate-token", {
+  const response = await fetch("[https://cap-ark.duckdns.org/validate-token](https://cap-ark.duckdns.org/validate-token)", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ token: token })
@@ -48,7 +44,7 @@ window.addEventListener("message", async (e) => {
 
   if (result.valid) {
     console.log("✅ Human verified!");
-    // Proceed with form submission or content unlocking
+    // Logic to unlock your content here
   } else {
     console.error("❌ Token invalid or expired.");
   }
@@ -56,32 +52,31 @@ window.addEventListener("message", async (e) => {
 
 🛠️ API Reference
 Endpoint	Method	Description
-/challenge	GET	Generates a new unique challenge and a randomized path.
-/verify	POST	Internal. Submits coordinates. If successful, issues a one-time token.
-/validate-token	POST	Public. Confirms if a token is legitimate and unused.
-Validate Token Request
+/challenge	GET	Generates a new unique challenge and a randomized path for the user to follow.
+/verify	POST	Internal: Used by the iframe to submit user coordinates. If the score meets requirements, it issues a one-time Verification Token.
+/validate-token	POST	Public: Used by the developer's server/frontend to confirm the token is legitimate.
+Token Validation Details
 
 POST https://cap-ark.duckdns.org/validate-token
 
 Request Body:
 JSON
 
-{
-  "token": "string"
+{ 
+  "token": "string" 
 }
 
 Response:
 JSON
 
-{
-  "valid": true
+{ 
+  "valid": true 
 }
 
-    [!IMPORTANT] One-Time Use: Once a token is validated, it is immediately destroyed to prevent replay attacks.
+    [!NOTE] Security: Once a token is validated, it is destroyed immediately (one-time use only).
 
 📜 License
 
 This project is licensed under the MIT License. You are free to use, modify, and host this yourself.
 
 If you use our hosted instance at cap-ark.duckdns.org, please follow fair-use principles (no spamming).
-
